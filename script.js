@@ -1,32 +1,114 @@
-const CATS = [["Bruc", "cat.png", 0], ["Xirri", "cat2.png", 0], ["Roc", "cat3.png", 0], ["Jazz", "cat4.png", 0], ["Blues", "cat5.png", 0]];
+/* ======= Model ======= */
 
-for (var i = 0; i < CATS.length; i++) {
-    // This is the cat we're on...
-    var cat = CATS[i][0];
-    var pic = CATS[i][1];
-    var count = CATS[i][2]
-    // We're creating a DOM element for the cat
-    var cat_elem = document.createElement('li');
-    cat_elem.textContent = cat;
+var model = { 
+        currentCat:0, 
+        cats: [
+            { name: "Bruc", 
+             clickCounter: 0,
+             image: "cat.png"},
 
-    var times_cat = document.getElementById("times");
-    // ... and when we click, display the image of `cat`, name
-    cat_elem.addEventListener('click', (function(c, p) {
-        return function() {
+            { name: "Xina", 
+              clickCounter: 0, 
+              image: "cat2.png"},
 
-            document.getElementById("cat_name").innerHTML = c;
-            var pic_cat = document.getElementById("image");
-            pic_cat.innerHTML = "<img src=img/" + p + " >";
-            times_cat.innerHTML = 0;
+            { name: "Roc", 
+              clickCounter: 0, 
+              image: "cat3.png"},
 
-            pic_cat.addEventListener('click', (function(t) {
-       		 return function() {
-       		 t++;
-            times_cat.innerHTML = t;
+            { name: "Jazz", 
+              clickCounter: 0, 
+              image: "cat4.png"},
 
-        };
-    })(count));
-        };
-    })(cat, pic));
-    document.getElementById("side_list").appendChild(cat_elem);
+            { name: "Blues", 
+              clickCounter: 0, 
+              image: "cat5.png"}]
+    };
+
+
+/* ======= Octopus ======= */
+
+var octopus = {
+
+    init: function() {
+
+        view_list.render();
+        view_info.init(model.cats[0]);
+    },
+
+    getList: function(){
+        return model.cats;
+    },
+
+    updateCurrentCat: function(index) {
+        model.currentCat = index;  
+    },
+
+    getCurrentCat: function() {
+        return model.cats[model.currentCat];
+    },  
+
+    count: function(){
+        model.cats[model.currentCat].clickCounter++ ;
+        view_info.render();
+    } 
+
 };
+
+
+
+
+
+var view_list = {
+    
+    render: function(){
+    var data = octopus.getList();
+        data.forEach(function(v, i){
+        var cat_elem = document.createElement('li');
+        cat_elem.textContent = v.name; 
+        document.getElementById("side_list").appendChild(cat_elem);
+        
+        cat_elem.addEventListener('click', (function(){
+            return function() {
+                octopus.updateCurrentCat(i);
+                view_info.render();
+            }
+        })(cat_elem));
+    });
+
+    }
+};
+
+/* ======= View ======= */
+
+
+var view_info = {
+
+    init: function(){
+
+        this.nameCat = document.getElementById("cat_name");
+        this.picCat = document.getElementById("image");
+        this.counterCat = document.getElementById("times");
+
+        this.picCat.addEventListener('click', (function() {
+            octopus.count();
+        }));  
+
+        view_info.render();
+    },
+
+    render: function(){
+        
+        var currentCat = octopus.getCurrentCat();
+
+        this.picCat.innerHTML = "<img src=img/" + currentCat.image + " >";
+        this.nameCat.innerHTML = currentCat.name;
+        this.counterCat.innerHTML = currentCat.clickCounter;  
+
+    }
+        
+
+};
+
+octopus.init();
+
+
