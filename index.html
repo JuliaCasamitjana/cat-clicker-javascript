@@ -8,17 +8,30 @@
 <body>
 <nav>
 	<ul>
-		<li>HOME</li>
-		<li>CONTENT</li>
-		<li>SUPPORT</li>
-		<li>CONTACT</li>
+		<li id="admin_button">ADMIN</li>
 	</ul>
 </nav>
 <h1>Click the cats</h1>
 <section>
-	<ul id="side_list">
-	
-	</ul>
+	<div class="side">
+		<ul id="side_list"></ul>
+		<div id="admin"> 
+		<form id="form">
+			<label for="name">Name</label>
+			<input type='text' id="name"><br/>
+
+			<label for="name">Clicks</label>
+			<input type='number' id="clicks" ><br/>
+
+			<label for="name">Image</label>
+			<input type='text' id="foto" ><br/>
+
+			<input id="cancel" value="Cancel">
+			<input id="save" value="Save">
+
+		</form>
+		</div>
+	</div>
 	<div class="cat_container">
 		<h2 class="name" id="cat_name"></h2>
 		<div id="image"></div>		

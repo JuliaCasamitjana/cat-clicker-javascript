@@ -16,13 +16,40 @@ h1{
 	text-align: center;
 	margin:1rem;
 }
-nav ul{
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
+nav{
 	background-color:#78F0AA;
 	height: 3rem;
 	color:#ED9CCF;
+
+}
+
+#admin{
+	display: none;
+	text-align: left;
+}
+
+input {
+  border: none;
+  color:#ED9CCF;
+  padding: 1rem;
+  text-decoration: none;
+  margin: 0.2rem;
+  cursor: pointer;
+  font-size: inherit;
+
+}
+
+#cancel, #save{
+width: 7rem;
+background-color:#78F0AA;
+
+
+}
+nav li{
+	height: 3rem;
+	width: 6rem;
+	padding: 1rem;
+	float:right;
 }
 
 li{
@@ -38,13 +65,19 @@ section{
 	
 }
 
-#side_list{
+.side{
 	display: inline-block;
+	vertical-align: top;
+}
+
+
+
+#side_list{
+
 	width: 8rem;
 	background-color:#78F0AA;
 	font-size: 1.5rem;
 	color:#ED9CCF;
-	vertical-align: top;
 	margin:2rem;
 
 }
@@ -52,9 +85,11 @@ section{
 	padding: 1rem;
 }
 
-#side_list li:hover{
+
+
+
+li:hover, nav li:hover{
 	color:#78F0AA;
-	font-size: 1.5rem;
 	background-color:#ED9CCF;
 	cursor: pointer;
 
